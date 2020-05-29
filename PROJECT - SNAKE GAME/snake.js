@@ -1,9 +1,20 @@
+
+
 function init(){
     var canvas = document.getElementById('mycanvas');
-    W = H = canvas.width = canvas.height = 1000;
+    W = canvas.width = 1200;
+    H = canvas.height = 600;
     pen = canvas.getContext('2d'); //to draw object
     cs = 66; //cell size is 50
     game_over = false;
+    score = 5;
+
+    //Create an Image object for food
+    food_img = new Image();
+    food_img.src = "Assets/apple.png";
+
+    trophy = new Image();
+    trophy.src = "Assets/trophy.png";
 
     food = getRandomFood();
 
@@ -37,6 +48,9 @@ function init(){
                 console.log("Food Eaten");
                 food = getRandomFood();
                 //if there is collision we will not pop the last cell
+
+                //whenever snake eats the food
+                score++;
             }
             else{
                 //extract cell from the last of the array
@@ -103,7 +117,12 @@ function draw(){
     snake.drawSnake();
 
     pen.fillStyle = food.color;
-    pen.fillRect(food.x*cs,food.y*cs,cs,cs);
+    pen.drawImage(food_img,food.x*cs,food.y*cs,cs,cs);
+    
+    pen.drawImage(trophy,18,20,cs,cs);
+    pen.fillStyle = "blue";
+    pen.font = "20px roboto";
+    pen.fillText(score,50,50);
 
 }
 
