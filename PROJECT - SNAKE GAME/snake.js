@@ -15,10 +15,23 @@ function init(){
                 this.cells.push({x:i,y:0});
             }
         },
-        drwaSnake:function(){
+        drawSnake:function(){
             for(var i=0;i<this.cells.length;i++){
+                pen.fillStyle = this.color;
                 pen.fillRect(this.cells[i].x*cs,this.cells[i].y*cs,cs-2,cs-2); //cs -2 to see the distinction between 2 boxes
             }
+        },
+        updateSnake: function(){
+            console.log("Updating snake");
+
+            //extract cell from the last of the array
+            this.cells.pop();
+            var headX = this.cells[0].x;
+            var headY = this.cells[0].y;
+
+            var X = headX + 1;
+            var Y = headY;
+            this.cells.unshift({x:X,y:Y})
         }
 };
 
@@ -27,12 +40,16 @@ snake.createSnake();
 }
 
 function draw(){
-    snake.drwaSnake();
+
+    //erase the old frame
+    pen.clearRect(0,0,W,H)
+
+    snake.drawSnake();
 
 }
 
 function update(){
-
+    snake.updateSnake();
 }
 
 function gameloop(){
