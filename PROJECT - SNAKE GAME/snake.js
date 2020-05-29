@@ -7,7 +7,7 @@ function init(){
     pen = canvas.getContext('2d'); //to draw object
     cs = 66; //cell size is 50
     game_over = false;
-    score = 5;
+    score = 0;
 
     //Create an Image object for food
     food_img = new Image();
